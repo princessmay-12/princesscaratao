@@ -1,30 +1,39 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>JS Exercise 3</title>
-</head>
-<body>
+let numbers = [];
 
-    <h1>JS Exercise 3</h1>
+function insertNumber() {
 
-    <label>Enter a Number:</label>
-    <input type="number" id="number"><br><br>
+    let value = document.getElementById("number").value;
 
-    <button onclick="insertNumber()">Insert</button>
-    <button onclick="deleteAll()">Delete All</button>
+    if (value == "") {
+        alert("Please enter a number.");
+        return;
+    }
 
-    <br><br>
+    value = Number(value);
+    numbers.push(value);
 
-    <p>Numbers:</p>
-    <div id="numbers"></div>
+    document.getElementById("numbers").innerHTML = numbers.join("<br>");
 
-    <br>
+    let sum = 0;
 
-    <p>Sum: <span id="sum"></span></p>
-    <p>Highest: <span id="highest"></span></p>
-    <p>Lowest: <span id="lowest"></span></p>
+    for (let i = 0; i < numbers.length; i++) {
+        sum += numbers[i];
+    }
 
-    <script src="script.js"></script>
+    document.getElementById("sum").innerHTML = sum;
+    document.getElementById("highest").innerHTML = Math.max(...numbers);
+    document.getElementById("lowest").innerHTML = Math.min(...numbers);
 
-</body>
-</html>
+    document.getElementById("number").value = "";
+}
+
+function deleteAll() {
+
+    numbers = [];
+
+    document.getElementById("number").value = "";
+    document.getElementById("numbers").innerHTML = "";
+    document.getElementById("sum").innerHTML = "";
+    document.getElementById("highest").innerHTML = "";
+    document.getElementById("lowest").innerHTML = "";
+}
